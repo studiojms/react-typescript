@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Template from './Template';
 import Home from './Home';
 
+import 'semantic-ui-css/semantic.min.css';
+
 const App: React.FC<{}> = () => (
   <Router>
     <Template>
