@@ -1,4 +1,5 @@
 /* eslint-disable */
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -21,6 +22,10 @@ const ENV = process.env.NODE_ENV || 'dev';
 
 const isProd = ENV != 'dev';
 
+if (isProd) {
+  plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+}
+
 module.exports = {
   entry: {
     application: path.join(__dirname, 'src/index.tsx'),
@@ -31,7 +36,7 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
   },
 
-  //  mode: 'production',
+  mode: isProd ? 'production' : 'development',
 
   // Enable sourcemaps for debugging webpack's output.
   devtool: 'source-map',

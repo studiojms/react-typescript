@@ -8,6 +8,8 @@
   "license": "Apache-2.0",
   "scripts": {
     "dev": "webpack-dev-server --port 3000 --mode=development",
+    "build:dev": "yarn install && webpack --mode=development",
+    "build:prod": "yarn install && NODE_ENV=prod webpack --mode=production",
     "lint": "eslint '*/**/*.{js,ts,tsx}'"
   },
   "dependencies": {
