@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Template: React.FC<{ children: React.ReactElement }> = ({ children }) => {
+interface TemplateProps {
+  children: React.ReactElement;
+}
+
+const Template: React.FC<TemplateProps> = ({ children }: TemplateProps) => {
   return <div>{children}</div>;
 };
 

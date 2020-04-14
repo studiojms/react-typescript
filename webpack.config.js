@@ -1,5 +1,7 @@
+/* eslint-disable */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const plugins = [
   new HtmlWebpackPlugin({
@@ -14,6 +16,10 @@ const plugins = [
     title: 'React with TS',
   }),
 ];
+
+const ENV = process.env.NODE_ENV || 'dev';
+
+const isProd = ENV != 'dev';
 
 module.exports = {
   entry: {
@@ -55,6 +61,21 @@ module.exports = {
     ],
   },
   plugins: plugins,
+  optimization: {
+    minimize: isProd,
+    runtimeChunk: true,
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
+    minimizer: isProd ? [new OptimizeCSSAssetsPlugin({})] : [],
+  },
   devServer: {
     stats: 'minimal',
     host: '0.0.0.0',
